@@ -82,8 +82,6 @@ module.exports = function(config) {
 			oldToken = undefined;
 		}
 
-		console.log(oldToken);
-
 		async.parallel({
 			generateNewToken: function (callback) {
 				config.generateToken(function (err, token) {
@@ -109,6 +107,7 @@ module.exports = function(config) {
 
 			res.cookie(config.key, user.id + config.separator + token, config.cookieOptions);
 			store.createToken({ userId: user.id, salt: salt, token: hash, expire: new Date(Date.now() + config.cookieOptions.maxAge) }, function (err) {
+				if (err) console.trace(err);
 				if (err) return _callback("Something went wrong while updating your cookie");
 				_callback(null);
 			});

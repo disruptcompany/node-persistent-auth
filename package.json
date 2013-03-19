@@ -1,7 +1,7 @@
 {
   "name": "persistent-auth",
   "version": "0.0.0",
-  "description": "ERROR: No README.md file found!",
+  "description": "Provide persistent authentication in your Express.JS app through cookies.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,11 @@
   "repository": "",
   "author": "",
   "license": "BSD",
+  "keywords": [
+    "persistent auth",
+    "cookies",
+    "express"
+  ],
   "dependencies": {
     "async": "0.2.6",
     "underscore": "1.4.4",
@@ -17,6 +22,16 @@
   "devDependencies": {
     "express": "3.1.0",
     "buster": ">= 0.0.1",
-    "everyauth": ">= 0.0.1"
-  }
+    "everyauth": "0.3.1",
+    "request": "2.16.2",
+    "sequelize": ">1.5.0",
+    "sqlite3": ">=2.1.7-alpha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innofluence/node-persistent-auth"
+  },
+  "engines": {
+    "node": "*"
+  },
 }
