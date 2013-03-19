@@ -13,7 +13,7 @@ module.exports = function(config) {
 		injectUser: true,
 		separator: ';',
 		generateToken: function (callback) {
-			crypto.randomBytes(16, function (err, buff) {
+			crypto.pseudoRandomBytes(16, function (err, buff) {
 				callback(err, buff.toString('base64'));
 			});
 		}
