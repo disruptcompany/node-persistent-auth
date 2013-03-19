@@ -16,8 +16,8 @@ var persistentStore = {
 	getTokens: function (userId, callback) {
 		UserAuth.findAll({ user_id: userId}).done(function (err, tokens) {
 			tokens.forEach(function (token) {
-				var buff = new Buffer(token.token, "hex");
-				token.token = buff.toString('base64');
+				var buff = new Buffer(token.token, "base64");
+				token.token = buff.toString();
 			});
 			callback(err, tokens);
 		});
@@ -28,8 +28,8 @@ var persistentStore = {
 	createToken: function (values, callback) {
 		values.user_id = values.userId;
 
-		var buff = new Buffer(values.token, "base64");
-		values.token = buff.toString('hex');
+		var buff = new Buffer(values.token);
+		values.token = buff.toString('base64');
 
 		UserAuth.create(values).done(callback);
 	},
@@ -76,8 +76,10 @@ everyauth.password
 
 
 everyauth.everymodule.handleLogout(function (req, res) {
+	req.logout();
+
 	persistence.clearCookie(res);
-	res.send(200);
+	res.send(200);	
 });
 
 
@@ -144,7 +146,7 @@ describe("Persistence", function () {
 	});
 
 	// This actually works without persistent cookies because of express sessions so we just make sure that we didn't break anything and that we recieve the right set-cookie header
-	itEventually("should recieve a cookie and become authenticated", function (done) {
+	it("should recieve a cookie and become authenticated", function (done) {
 		async.series([
 			function before(callback) {
 				request('http://localhost:3006/loginRequired', function (error, res) {
@@ -157,7 +159,7 @@ describe("Persistence", function () {
 			function auth(callback) {
 				request.post('http://localhost:3006/auth', { form: { email: 'john@doe.co.uk' }}, function (error, res) {
 					expect(error).toBeNull();
-					expect(res.headers['set-cookie'][0].indexOf('auth_remember')).not.toEqual(-1);
+					expect(res.headers['set-cookie'][0]).toMatch('auth_remember=1');
 					callback();
 				});
 			},
@@ -185,23 +187,19 @@ describe("Persistence", function () {
 			function auth(callback) {
 				request.post('http://localhost:3006/auth', { form: { email: 'john@doe.co.uk' }}, function (error, res) {
 					expect(error).toBeNull();
-					expect(res.headers['set-cookie'][0].indexOf('auth_remember')).not.toEqual(-1);
+					expect(res.headers['set-cookie'][0]).toMatch('auth_remember=1');
 					callback();
 				});
 			},
 			function clearSession(callback) {
-				console.log('hERE');
 				j.remove('expressesss');
 				callback();
 			},
 			function after(callback) {
-				console.log('hERE');
 				request('http://localhost:3006/loginRequired', function (error, res) {
-
-					console.log('hERE');
 					expect(error).toBeNull();
 					expect(res.statusCode).toEqual(200);
-					// expect(res.headers['set-cookie'][0].indexOf('auth_remember')).not.toEqual(-1);
+					expect(res.headers['set-cookie'][0]).toMatch('auth_remember=1');
 
 					callback();
 				});
@@ -209,7 +207,51 @@ describe("Persistence", function () {
 		], done);
 	});
 
-	itEventually("should clear the cookie when the user logs out", function (done) {
+	it("should only set a new cookie when a user uses the current to log in", function (done) {
+		async.series([
+			function before(callback) {
+				request('http://localhost:3006/loginRequired', function (error, res) {
+					expect(error).toBeNull();
+					expect(res.statusCode).toEqual(401);
+
+					callback();
+				});
+			},
+			function auth(callback) {
+				request.post('http://localhost:3006/auth', { form: { email: 'john@doe.co.uk' }}, function (error, res) {
+					expect(error).toBeNull();
+					expect(res.headers['set-cookie'][0]).toMatch('auth_remember=1');
+					callback();
+				});
+			},
+			function clearSession(callback) {
+				j.remove('expressesss');
+				callback();
+			},
+			function after(callback) {
+				// We removed our session cookie, so we use the auth_remember cookie to login, and a new cookie is set
+				request('http://localhost:3006/loginRequired', function (error, res) {
+					expect(error).toBeNull();
+					expect(res.statusCode).toEqual(200);
+					expect(res.headers['set-cookie'][0]).toMatch('auth_remember=1');
+
+					callback();
+				});
+			},
+			function afterAgain(callback) {
+				// We are already logged in now so no new cookie should be set
+				request('http://localhost:3006/loginRequired', function (error, res) {
+					expect(error).toBeNull();
+					expect(res.statusCode).toEqual(200);
+					expect(res.headers['set-cookie']).not.toBeDefined();
+
+					callback();
+				});
+			}
+		], done);
+	});
+
+	it("should clear the cookie when the user logs out", function (done) {
 		async.series([
 			function before(callback) {
 				request('http://localhost:3006/loginRequired', function (error, res) {
