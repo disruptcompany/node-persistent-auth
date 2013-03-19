@@ -27,6 +27,10 @@ The library should be instantiated with a store that is used to save the cookie 
 
 The callbacks given to the store follow the regular express callback style, so their signature is `callback(err, arg)`.
 
+### Installation
+
+	npm install persistent-auth
+
 ### Instantiation
 The instantiation fo the Persistence object is shown below. The values shown are the default values, except for store, which does not have a default value.
 
