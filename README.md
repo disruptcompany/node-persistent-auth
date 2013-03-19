@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/innofluence/dottie.js.png)](http://travis-ci.org/innofluence/dottie.js)
+[![Build Status](https://secure.travis-ci.org/innofluence/node-persistent-auth.png)](http://travis-ci.org/innofluence/node-persistent-auth)
 
 # Node persistent auth
 
