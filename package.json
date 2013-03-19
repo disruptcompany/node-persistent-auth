@@ -1,6 +1,6 @@
 {
   "name": "persistent-auth",
-  "version": "0.0.1-3",
+  "version": "0.0.1-4",
   "description": "Provide persistent authentication in your Express.JS app through cookies.",
   "main": "index.js",
   "author": {
