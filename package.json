@@ -1,0 +1,22 @@
+{
+  "name": "persistent-auth",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "async": "0.2.6",
+    "underscore": "1.4.4",
+    "pwd": "0.0.2"
+  },
+  "devDependencies": {
+    "express": "3.1.0",
+    "buster": ">= 0.0.1",
+    "everyauth": ">= 0.0.1"
+  }
+}
