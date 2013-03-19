@@ -18,7 +18,7 @@ module.exports = function(config) {
 			});
 		}
 	});
-	if (!config.store) throw new Error("You must provide a store to store and fetch persistence information");
+	if (!config.store || !_.isObject(config.store)) throw new Error("You must provide a store to store and fetch persistence information");
 	if (!_.isFunction(config.generateToken)) throw new Error("generateToken must be a function");
 	var store = config.store;
 

@@ -3,14 +3,26 @@
   "version": "0.0.1-1",
   "description": "Provide persistent authentication in your Express.JS app through cookies.",
   "main": "index.js",
+  "author": {
+    "name": "Jan Aagaard Meier",
+    "email": "jam@innofluence.com"
+  },
+  "maintainers": [
+    {
+      "name": "Mick Hansen",
+      "email": "mh@innofluence.com"
+    }
+  ],
   "scripts": {
-    "test": "./node_modules/.bin/buster-test"
+    "test": "buster-test"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/innofluence/node-persistent-auth"
   },
-  "author": "",
+  "bugs": {
+    "url": "https://github.com/innofluence/node-persistent-auth/issues"
+  },
   "license": "BSD",
   "keywords": [
     "persistent auth",
