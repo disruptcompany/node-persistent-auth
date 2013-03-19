@@ -33,7 +33,7 @@ module.exports = function(config) {
 					store.getTokens(userId, callback);
 				},
 				user: function (callback) {
-					store.getUser(userId, callback);	
+					store.getUser(userId, callback);
 				}
 			}, function (err, result) {
 				var auths = result.tokens,
@@ -64,7 +64,7 @@ module.exports = function(config) {
 						}
 						done();
 					});
-				});				
+				});
 			});
 		} else if (config.injectUser === true && req.session.auth && !res.user) {
 			store.getUser(req.session.auth.userId, function (err, user) {

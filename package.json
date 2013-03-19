@@ -1,12 +1,15 @@
 {
   "name": "persistent-auth",
-  "version": "0.0.0",
+  "version": "0.0.1-1",
   "description": "Provide persistent authentication in your Express.JS app through cookies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/buster-test"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/innofluence/node-persistent-auth"
+  },
   "author": "",
   "license": "BSD",
   "keywords": [
@@ -27,11 +30,7 @@
     "sequelize": ">1.5.0",
     "sqlite3": ">=2.1.7-alpha"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/innofluence/node-persistent-auth"
-  },
   "engines": {
     "node": "*"
-  },
+  }
 }
