@@ -39,10 +39,9 @@ module.exports = function(config) {
 				var auths = result.tokens,
 					user = result.user,
 					found = false,
-					done = _.after(auths.lenth, function () {
+					done = _.after(auths.length, function () {
 						if (!found) {
-							res.clearCookie(config.key);
-							res.send(403, "Invalid remember-me cookie provided, please try again");
+							next();
 						}
 					});
 

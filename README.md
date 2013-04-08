@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/innofluence/node-persistent-auth.png)](http://travis-ci.org/innofluence/node-persistent-auth)
+
 # Node persistent auth
 
 Provides persistent login through cookies, following best practices described in [Charles Miller's article](http://fishbowl.pastiche.org/2004/01/19/persistent_login_cookie_best_practice/)
