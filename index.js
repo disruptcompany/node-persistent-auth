@@ -91,10 +91,10 @@ module.exports = function(config) {
 			},
 			removeOldToken: function (callback) {
 				if (oldToken) {
-					store.destroyToken(oldToken, callback);	
+					store.destroyToken(oldToken, callback);
 				} else {
 					callback(null, null);
-				}				
+				}
 			}
 		}, function (err, result) {
 			if (err) console.trace(err);
