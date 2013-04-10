@@ -65,7 +65,7 @@ module.exports = function(config) {
 					});
 				});
 			});
-		} else if (config.injectUser === true && req.session.auth && !res.user) {
+		} else if (config.injectUser === true && req.session.auth && !req.user) {
 			store.getUser(req.session.auth.userId, function (err, user) {
 				req.user = user;
 				next();
